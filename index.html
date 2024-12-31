@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        :root {
+            --vanilla: #f0e4d0;
+            --chocolate: #553c13;
+        }
+
+        body {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #ff1493;
+        }
+
+        #cake {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        #cake img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .candles {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .candle {
+            width: 10px;
+            height: 50px;
+            background-color: #ff6347;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .candle::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: orange;
+            border-radius: 50%;
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        .candle.off::before {
+            display: none;
+        }
+
+        @keyframes flicker {
+            from {
+                transform: translateX(-50%) scale(1);
+            }
+            to {
+                transform: translateX(-50%) scale(1.2);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .snowflake, .gift {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            font-size: 1.5em;
+            color: white;
+            animation: fall 5s linear infinite;
+        }
+
+        .gift {
+            display: none;
+            color: #ff4500;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateX(-50px) translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Cake Surprise</title>
+</head>
+<body>
+    <div class="container">
+        <h1 id="greeting">Happy Birthday!</h1>
+        <button onclick="showSurprise()">Click for a Surprise</button>
+        <div id="cake" class="hidden">
+            <div class="candles">
+                <div class="candle"></div>
+                <div class="candle"></div>
+                <div class="candle"></div>
+                <div class="candle"></div>
+            </div>
+            <img src="download.jpg" alt="Chocolate Cake">
+            <br>
+            <button onclick="blowOutCandles()">Blow Out Candles</button>
+        </div>
+
+        <!-- Snowflakes -->
+        <div class="snowflake" style="animation-delay: 0s; left: 10%;">❄️</div>
+        <div class="snowflake" style="animation-delay: 1s; left: 30%;">❄️</div>
+        <div class="snowflake" style="animation-delay: 2s; left: 50%;">❄️</div>
+        <div class="snowflake" style="animation-delay: 3s; left: 70%;">❄️</div>
+        <div class="snowflake" style="animation-delay: 4s; left: 90%;">❄️</div>
+
+        <!-- Gifts -->
+        <div class="gift" style="animation-delay: 0s; left: 10%;">🎁</div>
+        <div class="gift" style="animation-delay: 1s; left: 30%;">🎁</div>
+        <div class="gift" style="animation-delay: 2s; left: 50%;">🎁</div>
+        <div class="gift" style="animation-delay: 3s; left: 70%;">🎁</div>
+        <div class="gift" style="animation-delay: 4s; left: 90%;">🎁</div>
+    </div>
+
+    <script>
+        function showSurprise() {
+            const cakeElement = document.getElementById('cake');
+            cakeElement.classList.toggle('hidden');
+
+            const snowflakes = document.querySelectorAll('.snowflake');
+            const gifts = document.querySelectorAll('.gift');
+
+            snowflakes.forEach(snowflake => {
+                snowflake.style.display = 'none';
+            });
+
+            gifts.forEach(gift => {
+                gift.style.display = 'block';
+            });
+        }
+
+        function blowOutCandles() {
+            const candles = document.querySelectorAll('.candle');
+            candles.forEach(candle => {
+                candle.classList.add('off'); // Add the "off" class to remove the flame
+            });
+            alert("Candles blown out!");
+        }
+    </script>
+</body>
+</html>
